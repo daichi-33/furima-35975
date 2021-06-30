@@ -17,30 +17,29 @@
 ### Association
 
  has_many :items
- has_many :buyers_record
+ has_many :buyer_records
  
 ## items テーブル
 
 | Column                 | Type        | Options                         |
 | ---------------------- | ----------- | ------------------------------- |
 | user                   | references  | null: false, foreign_key: true  |
-| image                  |             | null: false                     |
 | item_name              | string      | null: false                     |
 | description            | text        | null: false                     |
-| category               | integer     | null: false                     |
-| condition              | integer     | null: false                     |
-| postage                | integer     | null: false                     |
-| delivery_area          | integer     | null: false                     |
-| delivery_days          | integer     | null: false                     |
+| category_id            | integer     | null: false                     |
+| condition_id           | integer     | null: false                     |
+| postage_id             | integer     | null: false                     |
+| delivery_area_id       | integer     | null: false                     |
+| delivery_days_id       | integer     | null: false                     |
 | price                  | integer     | null: false                     |
 
 ### Association
 
-belongs_to :users
-has_one :buyers_record
+belongs_to :user
+has_one :buyer_record
 
 
-## buyers_record テーブル
+## buyer_records テーブル
 
 | Column                 | Type        | Options                         |
 | ---------------------- | ----------- | ------------------------------- |
@@ -49,17 +48,17 @@ has_one :buyers_record
 
 ### Association
 
-belongs_to :users
-belongs_to :items
-has_one :deliveries_info
+belongs_to :user
+belongs_to :item
+has_one :delivery_info
 
-## deliveries_info テーブル
+## delivery_infos テーブル
 
 | Column                 | Type        | Options                         |
 | ---------------------- | ----------- | ------------------------------- |
 | user                   | references  | null: false, foreign_key: true  |
 | postal_code            | string      | null: false                     |
-| prefectures            | integer     | null: false                     |
+| prefectures_id         | integer     | null: false                     |
 | municipality           | string      | null: false                     |
 | address                | string      | null: false                     |
 | building_name          | string      |                                 | 
@@ -67,4 +66,4 @@ has_one :deliveries_info
 
 ### Association
 
- belongs_to :buyers_record
+ belongs_to :buyer_record
