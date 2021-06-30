@@ -1,7 +1,7 @@
 # テーブル設計
 
 
-## users テーブル
+## users テーブル (ユーザー情報)
 
 | Column                  | Type       | Options                    |
 | ----------------------- | ---------- | -------------------------- |
@@ -19,7 +19,7 @@
  has_many :items
  has_many :buyer_records
  
-## items テーブル
+## items テーブル (商品情報)
 
 | Column                 | Type        | Options                         |
 | ---------------------- | ----------- | ------------------------------- |
@@ -39,7 +39,7 @@ belongs_to :user
 has_one :buyer_record
 
 
-## buyer_records テーブル
+## buyer_records テーブル (購入者記録)
 
 | Column                 | Type        | Options                         |
 | ---------------------- | ----------- | ------------------------------- |
@@ -52,11 +52,11 @@ belongs_to :user
 belongs_to :item
 has_one :delivery_info
 
-## delivery_infos テーブル
+## delivery_infos テーブル (配送先情報)
 
 | Column                 | Type        | Options                         |
 | ---------------------- | ----------- | ------------------------------- |
-| user                   | references  | null: false, foreign_key: true  |
+| buyer                  | references  | null: false, foreign_key: true  |
 | postal_code            | string      | null: false                     |
 | prefectures_id         | integer     | null: false                     |
 | municipality           | string      | null: false                     |
