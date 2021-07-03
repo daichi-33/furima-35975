@@ -4,12 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :items
-  has_many :buyer_records
+  # has_many :items
+  # has_many :buyer_records
 
   with_options presence: true do
     validates :nickname
-    validates :email
     validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i }
     validates :birthday
   end
