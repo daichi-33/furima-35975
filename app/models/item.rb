@@ -11,6 +11,7 @@ class Item < ApplicationRecord
   belongs_to :delivery_day
 
   with_options presence: true do
+    validates :image
     validates :name,        length: { maximum: 40 }
     validates :description, length: { maximum: 1000 }
     validates :price,       format: { with: /\A[0-9]+\z/ }
