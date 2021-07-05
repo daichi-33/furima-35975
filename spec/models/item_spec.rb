@@ -31,34 +31,34 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Description can't be blank")
       end
 
-      it 'category_idの指定がない場合、登録できない' do
-        @item.category_id = ''
+      it 'category_idが未選択（--）の場合、登録できない' do
+        @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category can't be blank")
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
       end
 
-      it 'condition_idの指定がない場合、登録できない' do
-        @item.condition_id = ''
+      it 'condition_idが未選択（--）の場合、登録できない' do
+        @item.condition_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Condition can't be blank")
+        expect(@item.errors.full_messages).to include("Condition must be other than 1")
       end
 
-      it 'postage_idの指定がない場合、登録できない' do
-        @item.postage_id = ''
+      it 'postage_idが未選択（--）の場合、登録できない' do
+        @item.postage_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Postage can't be blank")
+        expect(@item.errors.full_messages).to include("Postage must be other than 1")
       end
 
-      it 'delivery_area_idの指定がない場合、登録できない' do
-        @item.delivery_area_id = ''
+      it 'delivery_area_idが未選択（--）の場合、登録できない' do
+        @item.delivery_area_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Delivery area can't be blank")
+        expect(@item.errors.full_messages).to include("Delivery area must be other than 1")
       end
 
-      it 'delivery_day_idの指定がない場合、登録できない' do
-        @item.delivery_day_id = ''
+      it 'delivery_day_idが未選択（--）の場合、登録できない' do
+        @item.delivery_day_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Delivery day can't be blank")
+        expect(@item.errors.full_messages).to include("Delivery day must be other than 1")
       end
 
       it 'priceが空の場合、登録できない' do
@@ -73,14 +73,26 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Price is not a number')
       end
 
+      it 'priceが半角英数混合の場合、登録できない' do
+        @item.price = '10000yen'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is not a number')
+      end
+
+      it 'priceが半角英語のみの場合、登録できない' do
+        @item.price = 'onemillion'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is not a number')
+      end
+
       it 'priceの数値（半角数値）が299以下の場合、登録できない' do
-        @item.price = '200'
+        @item.price = 200
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
 
       it 'priceの数値（半角数値）が10000000以上の場合、登録できない' do
-        @item.price = '10000000'
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
