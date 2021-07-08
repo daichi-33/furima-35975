@@ -18,7 +18,7 @@
         <%= @item.price%>
       </span>
       <span class="item-postage">
-        <%= @item.postage.date %>
+        <%= @item.postage.data %>
       </span>
     </div>
 
@@ -46,23 +46,23 @@
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
-          <td class="detail-value"><%= @item.category.date %></td>
+          <td class="detail-value"><%= @item.category.data %></td>
         </tr>
         <tr>
           <th class="detail-item">商品の状態</th>
-          <td class="detail-value"><%= @item.condition.date %></td>
+          <td class="detail-value"><%= @item.condition.data %></td>
         </tr>
         <tr>
           <th class="detail-item">配送料の負担</th>
-          <td class="detail-value"><%= @item.postage.date %></td>
+          <td class="detail-value"><%= @item.postage.data %></td>
         </tr>
         <tr>
           <th class="detail-item">発送元の地域</th>
-          <td class="detail-value"><%= @item.delivery_area.date %></td>
+          <td class="detail-value"><%= @item.delivery_area.data %></td>
         </tr>
         <tr>
           <th class="detail-item">発送日の目安</th>
-          <td class="detail-value"><%= @item.delivery_day.date %></td>
+          <td class="detail-value"><%= @item.delivery_day.data %></td>
         </tr>
       </tbody>
     </table>
@@ -100,7 +100,7 @@
       後ろの商品 ＞
     </a>
   </div>
-  <a href="#" class="another-item"><%= @item.category.date %>をもっと見る</a>
+  <a href="#" class="another-item"><%= @item.category.data %>をもっと見る</a>
 </div>
 
 <%= render "shared/footer" %>
