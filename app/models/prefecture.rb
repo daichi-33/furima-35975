@@ -51,4 +51,7 @@ class Prefecture < ActiveHash::Base
     { id: 48, data: '沖縄県' }
   ]
 
+  include ActiveHash::Associations
+  has_many :delivery_infos
+
 end

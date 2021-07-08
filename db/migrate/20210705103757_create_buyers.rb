@@ -1,6 +1,6 @@
-class CreateBuyerRecords < ActiveRecord::Migration[6.0]
+class CreateBuyers < ActiveRecord::Migration[6.0]
   def change
-    create_table :buyer_records do |t|
+    create_table :buyers do |t|
       t.references :user, null: false, foreign_key: true
       t.references :item, null: false, foreign_key: true
 
