@@ -1,22 +1,29 @@
 class BuyersController < ApplicationController
+  before_action :authenticate_user!, except: :index
+
   def index
+    @item = Item.find(params[:item_id])
+    @buyer_delivery_info = BuyerDeliveryInfo.new
   end
   
   def new
+    @buyer_delivery_info = BuyerDeliveryInfo.new
   end
 
   def create
-    @buyer_record = BuyerRecord.create(buyer_record_params)
-    DeliveryInfo.create(delivery_info_params)
-    redirect_to root_path
+    @item = Item.find(params[:item_id])
+    @buyer_delivery_info = BuyerDeliveryInfo.new(buyer_params)
+    if @buyer_delivery_info.valid?
+      @buyer_delivery_info.save
+      redirect_to root_path
+    else
+      render :index
+    end
   end
 
   private
 
-  def buyer_record_params
-    params.permit(:buyer_record),merge(user_id: current_user.id)
+  def buyer_params
+    params.require(:buyer_delivery_info).permit(:postal_code, :prefecture_id, :municipality, :address, :building_name, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id])
   end
-
-  def delivery_info_params
-    params.permit(:postal_code, :prefecture, :municipality, :address, :building_name, :phone_number).merge(buyer_record_id: @buyer_record.id)
 end
