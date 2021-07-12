@@ -1,11 +1,16 @@
 class BuyersController < ApplicationController
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!
 
   def index
     @item = Item.find(params[:item_id])
     @buyer_delivery_info = BuyerDeliveryInfo.new
+    if current_user == @item.user
+      redirect_to root_path
+    elsif @item.buyer.present?
+      redirect_to root_path
+    end
   end
-  
+
   def new
     @buyer_delivery_info = BuyerDeliveryInfo.new
   end
@@ -25,12 +30,12 @@ class BuyersController < ApplicationController
   private
 
   def buyer_params
-    params.require(:buyer_delivery_info).permit(:postal_code, :prefecture_id, :municipality, :address, :building_name, 
+    params.require(:buyer_delivery_info).permit(:postal_code, :prefecture_id, :municipality, :address, :building_name,
                                                 :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 
   def pay_item
-    Payjp.api_key = "sk_test_dec990f80fa0028197f50198"
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: @item.price,
       card: buyer_params[:token],
