@@ -17,7 +17,7 @@
 ### Association
 
  has_many :items
- has_many :buyer_records
+ has_many :buyers
  
 ## items テーブル (商品情報)
 
@@ -36,10 +36,10 @@
 ### Association
 
 belongs_to :user
-has_one :buyer_record
+has_one :buyer
 
 
-## buyer_records テーブル (購入者記録)
+## buyers テーブル (購入者記録)
 
 | Column                 | Type        | Options                         |
 | ---------------------- | ----------- | ------------------------------- |
@@ -58,7 +58,7 @@ has_one :delivery_info
 | ---------------------- | ----------- | ------------------------------- |
 | buyer_record           | references  | null: false, foreign_key: true  |
 | postal_code            | string      | null: false                     |
-| prefectures_id         | integer     | null: false                     |
+| prefecture_id          | integer     | null: false                     |
 | municipality           | string      | null: false                     |
 | address                | string      | null: false                     |
 | building_name          | string      |                                 | 
@@ -66,4 +66,4 @@ has_one :delivery_info
 
 ### Association
 
- belongs_to :buyer_record
+ belongs_to :buyer

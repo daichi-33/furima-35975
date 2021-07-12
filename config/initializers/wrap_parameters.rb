@@ -12,3 +12,5 @@ end
 # ActiveSupport.on_load(:active_record) do
 #   self.include_root_in_json = true
 # end
+
+Webpacker::Compiler.env["PAYJP_PUBLIC_KEY"] = ENV["PAYJP_PUBLIC_KEY"]

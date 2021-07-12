@@ -7,4 +7,3 @@ window.addEventListener('load', () => {
     addProfitDom.innerHTML = Math.floor(priceInput.value) - Math.floor(priceInput.value * 0.1);
   })
 });
-  
