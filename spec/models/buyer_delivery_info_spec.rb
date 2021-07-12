@@ -33,7 +33,7 @@ RSpec.describe BuyerDeliveryInfo, type: :model do
     end
 
     it 'postal_codeが半角のハイフンを含んだ正しい形式でない場合、保存できない' do
-      @buyer_delivery_info.postal_code = 2_345_678
+      @buyer_delivery_info.postal_code = '2-345-678'
       @buyer_delivery_info.valid?
       expect(@buyer_delivery_info.errors.full_messages).to include('Postal code is invalid')
     end
@@ -62,16 +62,22 @@ RSpec.describe BuyerDeliveryInfo, type: :model do
       expect(@buyer_delivery_info.errors.full_messages).to include("Phone number can't be blank")
     end
 
+    it 'phone_numberが12桁以上の場合、保存できない' do
+      @buyer_delivery_info.phone_number = '0907865786545'
+      @buyer_delivery_info.valid?
+      expect(@buyer_delivery_info.errors.full_messages).to include('Phone number is invalid')
+    end
+
     it 'phone_numberが全角数字の場合、保存できない' do
       @buyer_delivery_info.phone_number = '０９０４５３６７２８１'
       @buyer_delivery_info.valid?
-      expect(@buyer_delivery_info.errors.full_messages).to include('Phone number is not a number')
+      expect(@buyer_delivery_info.errors.full_messages).to include('Phone number is invalid')
     end
 
     it 'phone_numberが半角のハイフンを含んでいる場合、保存できない' do
       @buyer_delivery_info.phone_number = '090-3829-1837'
       @buyer_delivery_info.valid?
-      expect(@buyer_delivery_info.errors.full_messages).to include('Phone number is not a number')
+      expect(@buyer_delivery_info.errors.full_messages).to include('Phone number is invalid')
     end
 
     it 'userと紐付いていない場合、保存できない' do
